@@ -3,7 +3,7 @@ const path = require('path');
 
 const pptx = new pptxgen();
 
-// Standard 16:9 Widescreen dimensions: 13.33 x 7.5 inches
+// Set 16:9 Widescreen (13.33 x 7.5 inches)
 pptx.layout = 'LAYOUT_16x9';
 pptx.title = 'EventEase Mini Project Presentation';
 pptx.author = 'Student';
@@ -17,22 +17,29 @@ const GREEN = '10B981';
 const AMBER = 'F59E0B';
 const PURPLE = '8B5CF6';
 
+function createSlide() {
+    let slide = pptx.addSlide();
+    // Native PPTX background fill spanning 100% edge-to-edge
+    slide.background = { fill: NAVY };
+    return slide;
+}
+
 function addHeader(slide, titleText) {
-    // Add title
+    // Header title
     slide.addText(titleText, {
         x: 0.8,
         y: 0.4,
-        w: 11.7,
-        h: 0.8,
+        w: 11.73,
+        h: 0.7,
         fontSize: 26,
         bold: true,
         color: LIGHT_BLUE,
         fontFace: 'Segoe UI'
     });
-    // Add full widescreen divider line
+    // Widescreen divider line
     slide.addShape(pptx.shapes.LINE, {
         x: 0.8,
-        y: 1.25,
+        y: 1.2,
         w: 11.73,
         h: 0,
         line: { color: '334155', width: 2 }
@@ -42,8 +49,7 @@ function addHeader(slide, titleText) {
 // -------------------------------------------------------------
 // SLIDE 1: Title Slide
 // -------------------------------------------------------------
-let slide1 = pptx.addSlide();
-slide1.background = { color: NAVY };
+let slide1 = createSlide();
 
 slide1.addShape(pptx.shapes.ROUNDED_RECTANGLE, {
     x: 4.8, y: 0.8, w: 3.7, h: 0.5,
@@ -101,8 +107,7 @@ slide1.addText([
 // -------------------------------------------------------------
 // SLIDE 2: Executive Summary & Problem/Solution
 // -------------------------------------------------------------
-let slide2 = pptx.addSlide();
-slide2.background = { color: NAVY };
+let slide2 = createSlide();
 addHeader(slide2, 'Executive Summary & Motivation');
 
 // Problem Box
@@ -145,8 +150,7 @@ slide2.addText([
 // -------------------------------------------------------------
 // SLIDE 3: Key Features Grid
 // -------------------------------------------------------------
-let slide3 = pptx.addSlide();
-slide3.background = { color: NAVY };
+let slide3 = createSlide();
 addHeader(slide3, 'Key Features & Capabilities');
 
 const features = [
@@ -182,8 +186,7 @@ features.forEach((feat, idx) => {
 // -------------------------------------------------------------
 // SLIDE 4: System Architecture
 // -------------------------------------------------------------
-let slide4 = pptx.addSlide();
-slide4.background = { color: NAVY };
+let slide4 = createSlide();
 addHeader(slide4, 'System Architecture & Technology Stack');
 
 // Diagram Boxes
@@ -236,8 +239,7 @@ slide4.addText('• Framework: ASP.NET MVC (.NET 10 / C# 12)\n• UI Styling: Bo
 // -------------------------------------------------------------
 // SLIDE 5: Page Structure Table
 // -------------------------------------------------------------
-let slide5 = pptx.addSlide();
-slide5.background = { color: NAVY };
+let slide5 = createSlide();
 addHeader(slide5, 'Website Pages & Navigation Breakdown');
 
 const rows = [
@@ -264,8 +266,7 @@ slide5.addTable(rows, {
 // -------------------------------------------------------------
 // SLIDE 6: Pricing & Calculation Workflow
 // -------------------------------------------------------------
-let slide6 = pptx.addSlide();
-slide6.background = { color: NAVY };
+let slide6 = createSlide();
 addHeader(slide6, 'Ticket Booking & Rupee Calculation Workflow');
 
 // Formula Box
@@ -313,8 +314,7 @@ slide6.addText('• Generates unique Booking Ref (e.g. EE-8A92B104).\n• Saves 
 // -------------------------------------------------------------
 // SLIDE 7: User Management System
 // -------------------------------------------------------------
-let slide7 = pptx.addSlide();
-slide7.background = { color: NAVY };
+let slide7 = createSlide();
 addHeader(slide7, 'User Management & Account System');
 
 const authCards = [
@@ -347,8 +347,7 @@ authCards.forEach((card, idx) => {
 // -------------------------------------------------------------
 // SLIDE 8: Testing & Build Verification
 // -------------------------------------------------------------
-let slide8 = pptx.addSlide();
-slide8.background = { color: NAVY };
+let slide8 = createSlide();
 addHeader(slide8, 'Testing, Build Verification & Git Setup');
 
 // Build Box
@@ -383,8 +382,7 @@ slide8.addText('Local Git initialized with .gitignore:\n\n• Commit 1: Initial 
 // -------------------------------------------------------------
 // SLIDE 9: Future Scope
 // -------------------------------------------------------------
-let slide9 = pptx.addSlide();
-slide9.background = { color: NAVY };
+let slide9 = createSlide();
 addHeader(slide9, 'Future Enhancements & Scope');
 
 const scopeItems = [
@@ -413,8 +411,7 @@ scopeItems.forEach((item, idx) => {
 // -------------------------------------------------------------
 // SLIDE 10: Conclusion
 // -------------------------------------------------------------
-let slide10 = pptx.addSlide();
-slide10.background = { color: NAVY };
+let slide10 = createSlide();
 
 slide10.addText('Thank You!', {
     x: 1.0, y: 1.5, w: 11.33, h: 1.2,
