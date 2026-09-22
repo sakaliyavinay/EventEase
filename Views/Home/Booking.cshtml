@@ -1,0 +1,167 @@
+@model EventEase.Models.BookingViewModel
+@{
+    ViewData["Title"] = "Book Event Ticket";
+    var selectedEvent = ViewBag.Event as EventEase.Models.EventItem;
+    var allEvents = ViewBag.AllEvents as List<EventEase.Models.EventItem>;
+}
+
+<div class="bg-dark text-white py-4 mb-4 border-bottom border-primary border-3">
+    <div class="container">
+        <h1 class="fw-bold mb-1"><i class="bi bi-ticket-fill text-primary me-2"></i>Event Ticket Booking</h1>
+        <p class="text-light opacity-75 mb-0">Select your preferred event, tier, and quantity to secure your digital pass instantly.</p>
+    </div>
+</div>
+
+<div class="container mb-5">
+    @if (Model.IsSubmitted)
+    {
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden mb-5">
+            <div class="bg-success text-white p-4 text-center">
+                <i class="bi bi-check-circle-fill display-3 mb-2"></i>
+                <h2 class="fw-bold mb-1">Booking Confirmed Successfully!</h2>
+                <p class="mb-0 fs-5">Thank you for booking with EventEase. Your e-ticket pass has been generated.</p>
+            </div>
+            <div class="card-body p-4 p-md-5 bg-white">
+                <div class="row g-4">
+                    <div class="col-md-6 border-end-md">
+                        <h5 class="fw-bold text-dark border-bottom pb-2 mb-3"><i class="bi bi-receipt me-2 text-primary"></i>Booking Summary</h5>
+                        <table class="table table-borderless table-sm">
+                            <tbody>
+                                <tr>
+                                    <td class="text-muted">Booking Reference:</td>
+                                    <td class="fw-bold text-primary fs-5">@Model.BookingReference</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted">Event Title:</td>
+                                    <td class="fw-bold">@Model.EventTitle</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted">Ticket Category:</td>
+                                    <td><span class="badge bg-primary">@Model.TicketType</span></td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted">Quantity:</td>
+                                    <td class="fw-bold">@Model.Quantity Ticket(s)</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-muted">Total Paid:</td>
+                                    <td class="fw-bold text-success fs-5">$@Model.TotalAmount.ToString("F2")</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-md-6">
+                        <h5 class="fw-bold text-dark border-bottom pb-2 mb-3"><i class="bi bi-person-badge me-2 text-primary"></i>Attendee Details</h5>
+                        <p class="mb-1"><strong>Name:</strong> @Model.CustomerName</p>
+                        <p class="mb-1"><strong>Email:</strong> @Model.CustomerEmail</p>
+                        <p class="mb-3"><strong>Phone:</strong> @Model.CustomerPhone</p>
+
+                        <div class="p-3 bg-light rounded-3 border text-center">
+                            <i class="bi bi-qr-code display-4 text-dark mb-2 d-block"></i>
+                            <span class="small text-muted">Show this QR Pass at the venue entrance</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-3 border-top text-center">
+                    <a asp-action="Booking" class="btn btn-outline-primary fw-semibold me-2">Book Another Ticket</a>
+                    <a asp-action="Events" class="btn btn-primary fw-semibold">Return to Events Catalog</a>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            <!-- Event Preview Card -->
+            <div class="col-lg-5">
+                <div class="card shadow-sm border-0 rounded-3 overflow-hidden sticky-top" style="top: 20px;">
+                    <img src="@(selectedEvent?.ImageUrl ?? "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&auto=format&fit=crop")" class="card-img-top" style="height: 220px; object-fit: cover;" alt="Event image" />
+                    <div class="card-body p-4">
+                        <span class="badge bg-primary mb-2">@(selectedEvent?.Category ?? "Tech")</span>
+                        <h4 class="fw-bold text-dark mb-2">@(selectedEvent?.Title ?? "Global Tech Summit 2026")</h4>
+                        <p class="text-muted small mb-3">@(selectedEvent?.Description)</p>
+
+                        <div class="border-top pt-3">
+                            <p class="small text-muted mb-2"><i class="bi bi-calendar3 me-2 text-primary"></i>@(selectedEvent?.Date) at @(selectedEvent?.Time)</p>
+                            <p class="small text-muted mb-2"><i class="bi bi-geo-alt-fill me-2 text-danger"></i>@(selectedEvent?.Location)</p>
+                            <p class="small text-muted mb-2"><i class="bi bi-ticket-perforated me-2 text-success"></i>Seats Left: <strong>@(selectedEvent?.SeatsAvailable) Seats</strong></p>
+                            <h4 class="fw-bold text-success mt-3 mb-0">Base Price: $@(selectedEvent?.Price.ToString("F2")) / ticket</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Booking Form -->
+            <div class="col-lg-7">
+                <div class="card shadow-sm border-0 rounded-3 p-4 p-md-5 bg-white">
+                    <h3 class="fw-bold mb-1"><i class="bi bi-pencil-square text-primary me-2"></i>Complete Ticket Reservation</h3>
+                    <p class="text-muted small mb-4">Fill out your information to reserve your tickets.</p>
+
+                    <form asp-action="Booking" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="EventId" class="form-label fw-semibold">Select Event</label>
+                            <select asp-for="EventId" class="form-select" onchange="window.location.href='/Home/Booking/' + this.value;">
+                                @if (allEvents != null)
+                                {
+                                    @foreach (var ev in allEvents)
+                                    {
+                                        <option value="@ev.Id" selected="@(ev.Id == (selectedEvent?.Id ?? 1))">@ev.Title - $@ev.Price.ToString("F2")</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="CustomerName" class="form-label fw-semibold">Full Name *</label>
+                                <input asp-for="CustomerName" class="form-control" placeholder="e.g. Alex Johnson" />
+                                <span asp-validation-for="CustomerName" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="CustomerEmail" class="form-label fw-semibold">Email Address *</label>
+                                <input asp-for="CustomerEmail" class="form-control" type="email" placeholder="alex@example.com" />
+                                <span asp-validation-for="CustomerEmail" class="text-danger small"></span>
+                            </div>
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label asp-for="CustomerPhone" class="form-label fw-semibold">Phone Number *</label>
+                                <input asp-for="CustomerPhone" class="form-control" placeholder="+1 (555) 019-2834" />
+                                <span asp-validation-for="CustomerPhone" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="TicketType" class="form-label fw-semibold">Pass Type</label>
+                                <select asp-for="TicketType" class="form-select">
+                                    <option value="Standard">Standard Pass (Regular Price)</option>
+                                    <option value="VIP Pass">VIP Pass (+50% Price with Lounge Access)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="Quantity" class="form-label fw-semibold">Number of Tickets (1 to 10)</label>
+                            <input asp-for="Quantity" class="form-control" type="number" min="1" max="10" />
+                            <span asp-validation-for="Quantity" class="text-danger small"></span>
+                        </div>
+
+                        <div class="p-3 bg-light rounded-3 border mb-4">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span class="fw-semibold">Estimated Total:</span>
+                                <span class="fw-bold fs-4 text-success">$@(selectedEvent?.Price.ToString("F2"))</span>
+                            </div>
+                            <span class="small text-muted">* Final total calculated based on quantity and pass tier selected.</span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold shadow">
+                            <i class="bi bi-credit-card-fill me-2"></i> Confirm Ticket Booking
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>

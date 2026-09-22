@@ -1,0 +1,137 @@
+@model IEnumerable<EventEase.Models.EventItem>
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- Hero Section -->
+<section class="hero-banner mb-5 text-center text-lg-start">
+    <div class="container">
+        <div class="row align-items-center gy-4">
+            <div class="col-lg-7">
+                <span class="badge bg-primary px-3 py-2 text-uppercase mb-3 rounded-pill">Premier Event Booking Platform</span>
+                <h1 class="display-4 fw-bold mb-3">Discover & Book Unforgettable Events</h1>
+                <p class="lead mb-4 text-light opacity-90">Book tickets for top tech summits, live concerts, culinary expos, sports championships, and workshops with instant digital passes.</p>
+                <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+                    <a asp-action="Events" class="btn btn-primary btn-lg fw-bold px-4 shadow">
+                        <i class="bi bi-compass-fill me-2"></i>Explore Events
+                    </a>
+                    <a asp-action="Booking" class="btn btn-outline-light btn-lg fw-bold px-4">
+                        <i class="bi bi-ticket-perforated-fill me-2"></i>Book Tickets Now
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-5 text-center">
+                <img src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=700&auto=format&fit=crop" class="img-fluid rounded-4 shadow-lg border border-3 border-light" alt="Event Crowd" />
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Bar -->
+<div class="container mb-5">
+    <div class="row g-3">
+        <div class="col-md-3 col-6">
+            <div class="stat-card shadow-sm text-center">
+                <h2 class="fw-bold text-primary mb-1">500+</h2>
+                <p class="text-muted mb-0 small text-uppercase">Events Hosted</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="stat-card shadow-sm text-center" style="border-left-color: #10b981;">
+                <h2 class="fw-bold text-success mb-1">50,000+</h2>
+                <p class="text-muted mb-0 small text-uppercase">Tickets Issued</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="stat-card shadow-sm text-center" style="border-left-color: #f59e0b;">
+                <h2 class="fw-bold text-warning mb-1">120+</h2>
+                <p class="text-muted mb-0 small text-uppercase">Partner Venues</p>
+            </div>
+        </div>
+        <div class="col-md-3 col-6">
+            <div class="stat-card shadow-sm text-center" style="border-left-color: #8b5cf6;">
+                <h2 class="fw-bold text-purple mb-1" style="color:#8b5cf6;">99.8%</h2>
+                <p class="text-muted mb-0 small text-uppercase">Satisfaction Rate</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Featured Events -->
+<div class="container mb-5">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+        <div>
+            <h2 class="fw-bold mb-1"><i class="bi bi-star-fill text-warning me-2"></i>Featured Events</h2>
+            <p class="text-muted mb-0">Handpicked upcoming events you shouldn't miss.</p>
+        </div>
+        <a asp-action="Events" class="btn btn-outline-primary fw-semibold">
+            View All Events <i class="bi bi-arrow-right"></i>
+        </a>
+    </div>
+
+    <div class="row g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4">
+                <div class="card event-card h-100 shadow-sm">
+                    <img src="@item.ImageUrl" class="card-img-top" alt="@item.Title" />
+                    <div class="card-body d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge bg-primary badge-category">@item.Category</span>
+                            <span class="fw-bold text-success fs-5">$@item.Price</span>
+                        </div>
+                        <h5 class="card-title fw-bold text-dark mb-2">@item.Title</h5>
+                        <p class="card-text text-muted small flex-grow-1">@item.Description</p>
+                        
+                        <div class="border-top pt-3 mt-2">
+                            <p class="small text-muted mb-1"><i class="bi bi-calendar3 me-2 text-primary"></i>@item.Date at @item.Time</p>
+                            <p class="small text-muted mb-3"><i class="bi bi-geo-alt-fill me-2 text-danger"></i>@item.Location</p>
+                            <a asp-action="Booking" asp-route-id="@item.Id" class="btn btn-primary w-100 fw-semibold">
+                                <i class="bi bi-ticket-fill me-1"></i> Book Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Why Choose EventEase -->
+<section class="bg-white py-5 border-top border-bottom mb-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Why Choose EventEase?</h2>
+            <p class="text-muted">The simplest way to discover and reserve tickets online.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4 text-center">
+                <div class="feature-box">
+                    <div class="p-3 bg-primary bg-opacity-10 text-primary rounded-circle d-inline-block mb-3 fs-2">
+                        <i class="bi bi-lightning-charge-fill"></i>
+                    </div>
+                    <h5 class="fw-bold">Instant Ticket Delivery</h5>
+                    <p class="text-muted small">Receive instant digital QR code tickets directly to your inbox upon booking confirmation.</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="feature-box">
+                    <div class="p-3 bg-success bg-opacity-10 text-success rounded-circle d-inline-block mb-3 fs-2">
+                        <i class="bi bi-shield-lock-fill"></i>
+                    </div>
+                    <h5 class="fw-bold">100% Guaranteed Passes</h5>
+                    <p class="text-muted small">All tickets sold on EventEase are verified directly with event organizers for total security.</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="feature-box">
+                    <div class="p-3 bg-warning bg-opacity-10 text-warning rounded-circle d-inline-block mb-3 fs-2">
+                        <i class="bi bi-headset"></i>
+                    </div>
+                    <h5 class="fw-bold">24/7 Concierge Support</h5>
+                    <p class="text-muted small">Our support desk is always ready to assist you with ticket changes, queries, and refunds.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

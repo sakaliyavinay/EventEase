@@ -1,0 +1,92 @@
+@{
+    ViewData["Title"] = "Services";
+}
+
+<div class="bg-dark text-white py-4 mb-4 border-bottom border-primary border-3">
+    <div class="container">
+        <h1 class="fw-bold mb-1"><i class="bi bi-grid-fill text-primary me-2"></i>Our Services & Solutions</h1>
+        <p class="text-light opacity-75 mb-0">Discover the full spectrum of ticketing, venue management, and event hosting services provided by EventEase.</p>
+    </div>
+</div>
+
+<div class="container mb-5">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 rounded-3 p-4 text-center">
+                <div class="p-3 bg-primary bg-opacity-10 text-primary rounded-circle d-inline-block mx-auto mb-3 fs-1" style="width: 80px; height: 80px; line-height: 50px;">
+                    <i class="bi bi-ticket-perforated"></i>
+                </div>
+                <h4 class="fw-bold mb-3">Online Ticket Booking</h4>
+                <p class="text-muted small">Seamless, real-time ticket purchase with instant mobile e-ticket delivery, seat preferences, and multi-tier pricing options (Standard vs VIP).</p>
+                <div class="mt-auto border-top pt-3">
+                    <a asp-action="Events" class="btn btn-outline-primary btn-sm fw-semibold">Browse Tickets</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 rounded-3 p-4 text-center">
+                <div class="p-3 bg-success bg-opacity-10 text-success rounded-circle d-inline-block mx-auto mb-3 fs-1" style="width: 80px; height: 80px; line-height: 50px;">
+                    <i class="bi bi-building"></i>
+                </div>
+                <h4 class="fw-bold mb-3">Venue & Hall Reservation</h4>
+                <p class="text-muted small">Partnering with premier convention halls, auditoriums, outdoor parks, and stadiums to help organizers reserve world-class event venues.</p>
+                <div class="mt-auto border-top pt-3">
+                    <a asp-action="Contact" class="btn btn-outline-success btn-sm fw-semibold">Inquire Venue</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 rounded-3 p-4 text-center">
+                <div class="p-3 bg-warning bg-opacity-10 text-warning rounded-circle d-inline-block mx-auto mb-3 fs-1" style="width: 80px; height: 80px; line-height: 50px;">
+                    <i class="bi bi-star"></i>
+                </div>
+                <h4 class="fw-bold mb-3">VIP Pass Upgrades</h4>
+                <p class="text-muted small">Access exclusive backstage passes, priority fast-track entry lines, complimentary lounge dining, and meet-and-greet sessions with speakers.</p>
+                <div class="mt-auto border-top pt-3">
+                    <a asp-action="Booking" class="btn btn-outline-warning btn-sm fw-semibold text-dark">Get VIP Pass</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 rounded-3 p-4 text-center">
+                <div class="p-3 bg-info bg-opacity-10 text-info rounded-circle d-inline-block mx-auto mb-3 fs-1" style="width: 80px; height: 80px; line-height: 50px;">
+                    <i class="bi bi-briefcase-fill"></i>
+                </div>
+                <h4 class="fw-bold mb-3">Corporate Event Planning</h4>
+                <p class="text-muted small">Turnkey solutions for tech conferences, product launches, corporate annual summits, hackathons, and shareholder assemblies.</p>
+                <div class="mt-auto border-top pt-3">
+                    <a asp-action="Contact" class="btn btn-outline-info btn-sm fw-semibold">Contact Corporate Sales</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 rounded-3 p-4 text-center">
+                <div class="p-3 bg-danger bg-opacity-10 text-danger rounded-circle d-inline-block mx-auto mb-3 fs-1" style="width: 80px; height: 80px; line-height: 50px;">
+                    <i class="bi bi-shield-check"></i>
+                </div>
+                <h4 class="fw-bold mb-3">Ticket Insurance & Protection</h4>
+                <p class="text-muted small">Flex-refund guarantee allowing easy ticket transfer or full refund coverage in case of unexpected schedule changes or emergencies.</p>
+                <div class="mt-auto border-top pt-3">
+                    <span class="badge bg-light text-danger border border-danger px-3 py-2">Included on all bookings</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm border-0 rounded-3 p-4 text-center">
+                <div class="p-3 bg-secondary bg-opacity-10 text-secondary rounded-circle d-inline-block mx-auto mb-3 fs-1" style="width: 80px; height: 80px; line-height: 50px;">
+                    <i class="bi bi-qr-code-scan"></i>
+                </div>
+                <h4 class="fw-bold mb-3">On-site Gate Management</h4>
+                <p class="text-muted small">High-speed barcode/QR gate scanning hardware and mobile apps ensuring zero queue bottlenecks at event entry gates.</p>
+                <div class="mt-auto border-top pt-3">
+                    <a asp-action="Contact" class="btn btn-outline-secondary btn-sm fw-semibold">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
