@@ -1,3 +1,4 @@
+@using Microsoft.AspNetCore.Http
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,37 +22,68 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarMain">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-semibold align-items-lg-center gap-2">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 fw-semibold align-items-lg-center gap-1">
                         <li class="nav-item">
-                            <a class="nav-link px-3 @(ViewData["Title"]?.ToString() == "Home - EventEase" || ViewData["Title"]?.ToString() == "Home" ? "active text-primary fw-bold" : "")" asp-area="" asp-controller="Home" asp-action="Index">
+                            <a class="nav-link px-2 @(ViewData["Title"]?.ToString() == "Home - EventEase" || ViewData["Title"]?.ToString() == "Home" ? "active text-primary fw-bold" : "")" asp-area="" asp-controller="Home" asp-action="Index">
                                 <i class="bi bi-house-door-fill me-1"></i> Home
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link px-3 @(ViewData["Title"]?.ToString()?.Contains("Browse Events") == true ? "active text-primary fw-bold" : "")" asp-area="" asp-controller="Home" asp-action="Events">
+                            <a class="nav-link px-2 @(ViewData["Title"]?.ToString()?.Contains("Browse Events") == true ? "active text-primary fw-bold" : "")" asp-area="" asp-controller="Home" asp-action="Events">
                                 <i class="bi bi-calendar-event-fill me-1"></i> Events Catalog
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link px-3 @(ViewData["Title"]?.ToString()?.Contains("Services") == true ? "active text-primary fw-bold" : "")" asp-area="" asp-controller="Home" asp-action="Services">
+                            <a class="nav-link px-2 @(ViewData["Title"]?.ToString()?.Contains("Services") == true ? "active text-primary fw-bold" : "")" asp-area="" asp-controller="Home" asp-action="Services">
                                 <i class="bi bi-grid-fill me-1"></i> Services
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link px-3 @(ViewData["Title"]?.ToString()?.Contains("About") == true ? "active text-primary fw-bold" : "")" asp-area="" asp-controller="Home" asp-action="About">
+                            <a class="nav-link px-2 @(ViewData["Title"]?.ToString()?.Contains("About") == true ? "active text-primary fw-bold" : "")" asp-area="" asp-controller="Home" asp-action="About">
                                 <i class="bi bi-info-circle-fill me-1"></i> About Us
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link px-3 @(ViewData["Title"]?.ToString()?.Contains("Contact") == true ? "active text-primary fw-bold" : "")" asp-area="" asp-controller="Home" asp-action="Contact">
+                            <a class="nav-link px-2 @(ViewData["Title"]?.ToString()?.Contains("Contact") == true ? "active text-primary fw-bold" : "")" asp-area="" asp-controller="Home" asp-action="Contact">
                                 <i class="bi bi-envelope-fill me-1"></i> Contact Us
                             </a>
                         </li>
-                        <li class="nav-item ms-lg-2">
-                            <a class="btn btn-primary text-white fw-bold px-3 py-2 shadow-sm d-inline-flex align-items-center gap-1" asp-area="" asp-controller="Home" asp-action="Booking">
+                        <li class="nav-item">
+                            <a class="btn btn-primary text-white fw-bold px-3 py-1 shadow-sm ms-lg-2 d-inline-flex align-items-center gap-1" asp-area="" asp-controller="Home" asp-action="Booking">
                                 <i class="bi bi-ticket-fill"></i> Book Ticket
                             </a>
                         </li>
+
+                        <!-- User Management Navbar Items -->
+                        @{
+                            var userName = Context.Session.GetString("UserName");
+                        }
+                        @if (!string.IsNullOrEmpty(userName))
+                        {
+                            <li class="nav-item ms-lg-2">
+                                <a class="btn btn-outline-light fw-semibold px-3 py-1 d-inline-flex align-items-center gap-1" asp-controller="Account" asp-action="Profile">
+                                    <i class="bi bi-person-circle text-primary"></i> @userName
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-outline-danger btn-sm px-2 py-1 ms-1" asp-controller="Account" asp-action="Logout" title="Log Out">
+                                    <i class="bi bi-box-arrow-right"></i>
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item ms-lg-2">
+                                <a class="btn btn-outline-light fw-semibold px-3 py-1 me-1" asp-controller="Account" asp-action="Login">
+                                    <i class="bi bi-box-arrow-in-right me-1"></i> Log In
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="btn btn-success fw-bold px-3 py-1 text-white shadow-sm" asp-controller="Account" asp-action="Register">
+                                    <i class="bi bi-person-plus-fill me-1"></i> Sign Up
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -76,7 +108,7 @@
                         <li><a class="text-secondary text-decoration-none hover-primary" asp-controller="Home" asp-action="Events"><i class="bi bi-chevron-right me-1 small text-primary"></i> Events Catalog</a></li>
                         <li><a class="text-secondary text-decoration-none hover-primary" asp-controller="Home" asp-action="Services"><i class="bi bi-chevron-right me-1 small text-primary"></i> Services</a></li>
                         <li><a class="text-secondary text-decoration-none hover-primary" asp-controller="Home" asp-action="About"><i class="bi bi-chevron-right me-1 small text-primary"></i> About Us</a></li>
-                        <li><a class="text-secondary text-decoration-none hover-primary" asp-controller="Home" asp-action="Booking"><i class="bi bi-chevron-right me-1 small text-primary"></i> Ticket Booking</a></li>
+                        <li><a class="text-secondary text-decoration-none hover-primary" asp-controller="Account" asp-action="Login"><i class="bi bi-chevron-right me-1 small text-primary"></i> Log In / Account</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-4 col-md-12">
