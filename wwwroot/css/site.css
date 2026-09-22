@@ -1,31 +1,50 @@
 /* Custom Styling for EventEase */
 :root {
     --primary-color: #0d6efd;
-    --dark-bg: #1e293b;
+    --dark-bg: #0f172a;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #334155;
+    background-color: #f8fafc;
+    display: flex;
+    flex-direction: column;
+    min-vh-100: 100vh;
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+footer {
+    flex-shrink: 0;
 }
 
 .hero-banner {
     background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
     color: white;
-    padding: 80px 0;
+    padding: 70px 0;
     border-bottom: 4px solid var(--primary-color);
 }
 
 .event-card {
     transition: transform 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
-    border: none;
+    border: 1px solid #e2e8f0;
     border-radius: 12px;
     overflow: hidden;
+    background: #ffffff;
 }
 
 .event-card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15) !important;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12) !important;
 }
 
 .event-card img {
@@ -35,7 +54,7 @@ body {
 
 .badge-category {
     font-size: 0.75rem;
-    padding: 0.35em 0.7em;
+    padding: 0.35em 0.75em;
     border-radius: 20px;
 }
 
@@ -43,12 +62,13 @@ body {
     padding: 30px 20px;
     border-radius: 12px;
     background: #ffffff;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
     transition: all 0.2s ease;
+    border: 1px solid #f1f5f9;
 }
 
 .feature-box:hover {
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
 }
 
 .stat-card {
@@ -56,12 +76,14 @@ body {
     border-radius: 12px;
     padding: 24px;
     border-left: 5px solid var(--primary-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-.bg-accent {
-    background-color: #e0e7ff;
+.hover-primary:hover {
+    color: #3b82f6 !important;
+    transition: color 0.2s ease;
 }
 
-.nav-link.active {
-    font-weight: 700;
+.tracking-wider {
+    letter-spacing: 0.05em;
 }
