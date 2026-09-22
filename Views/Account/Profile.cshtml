@@ -1,6 +1,7 @@
 @model EventEase.Models.UserModel
 @{
     ViewData["Title"] = "User Profile";
+    var userBookings = ViewBag.UserBookings as List<EventEase.Models.BookedTicketModel> ?? new List<EventEase.Models.BookedTicketModel>();
 }
 
 <div class="bg-dark text-white py-4 mb-4 border-bottom border-primary border-3">
@@ -46,35 +47,66 @@
             </div>
         </div>
 
-        <!-- Dashboard Content -->
+        <!-- Dashboard Content: User's Booked Tickets -->
         <div class="col-lg-8">
             <div class="card shadow-sm border-0 rounded-3 p-4 p-md-5 bg-white mb-4">
-                <h4 class="fw-bold mb-3 border-bottom pb-2"><i class="bi bi-ticket-perforated text-primary me-2"></i>My Booked Tickets</h4>
-                
-                <div class="p-4 bg-light rounded-3 border text-center my-3">
-                    <div class="fs-2 text-muted mb-2"><i class="bi bi-calendar-check"></i></div>
-                    <h5 class="fw-bold mb-1">Active Ticket Passes</h5>
-                    <p class="text-muted small mb-3">You have 1 active ticket pass registered under <strong>@Model.Email</strong>.</p>
-                    
-                    <div class="card border text-start shadow-xs p-3 bg-white mx-auto" style="max-width: 500px;">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="badge bg-success">Confirmed</span>
-                            <span class="small text-muted fw-bold">Ref: EE-8A92B104</span>
-                        </div>
-                        <h6 class="fw-bold mb-1">Global Tech Summit 2026</h6>
-                        <p class="small text-muted mb-2"><i class="bi bi-geo-alt-fill text-danger me-1"></i>Silicon Convention Center | Oct 15, 2026</p>
-                        <div class="d-flex justify-content-between align-items-center border-top pt-2 mt-2">
-                            <span class="small">1x Standard Pass</span>
-                            <a asp-controller="Home" asp-action="Booking" class="btn btn-sm btn-outline-primary fw-semibold">View Ticket Pass</a>
-                        </div>
-                    </div>
+                <div class="d-flex justify-content-between align-items-center mb-3 border-bottom pb-2">
+                    <h4 class="fw-bold mb-0"><i class="bi bi-ticket-perforated text-primary me-2"></i>My Booked Tickets</h4>
+                    <span class="badge bg-success px-3 py-2 rounded-pill fs-6">@userBookings.Count Ticket(s) Found</span>
                 </div>
+                
+                @if (!userBookings.Any())
+                {
+                    <div class="p-5 bg-light rounded-3 text-center my-3 border">
+                        <i class="bi bi-ticket-detailed text-muted display-3 mb-3 d-block"></i>
+                        <h5 class="fw-bold text-dark mb-1">No Tickets Booked Yet</h5>
+                        <p class="text-muted small mb-4">When you book event passes on EventEase, your digital passes will automatically show up right here.</p>
+                        <a asp-controller="Home" asp-action="Events" class="btn btn-primary fw-semibold">
+                            <i class="bi bi-compass-fill me-1"></i> Browse & Book Tickets
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <div class="d-flex flex-column gap-3 my-3">
+                        @foreach (var ticket in userBookings)
+                        {
+                            <div class="card border shadow-xs rounded-3 overflow-hidden bg-white">
+                                <div class="card-header bg-dark text-white d-flex justify-content-between align-items-center py-2 px-3">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="bi bi-ticket-perforated-fill text-primary"></i>
+                                        <span class="fw-bold small">Ref: @ticket.BookingReference</span>
+                                    </div>
+                                    <span class="badge bg-success">Confirmed</span>
+                                </div>
+                                <div class="card-body p-3">
+                                    <div class="row align-items-center gy-2">
+                                        <div class="col-md-7">
+                                            <h5 class="fw-bold text-dark mb-1">@ticket.EventTitle</h5>
+                                            <p class="small text-muted mb-1"><i class="bi bi-geo-alt-fill text-danger me-1"></i>@ticket.EventLocation</p>
+                                            <p class="small text-muted mb-0"><i class="bi bi-calendar-event text-primary me-1"></i>Event Date: <strong>@ticket.EventDate</strong></p>
+                                        </div>
+                                        <div class="col-md-5 text-md-end border-start-md pt-2 pt-md-0">
+                                            <span class="badge bg-primary mb-1">@ticket.TicketType</span>
+                                            <p class="small mb-1">Quantity: <strong>@ticket.Quantity Ticket(s)</strong></p>
+                                            <h5 class="fw-bold text-success mb-0">Total: ₹@ticket.TotalAmount.ToString("N0")</h5>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-light py-2 px-3 d-flex justify-content-between align-items-center small">
+                                    <span class="text-muted">Booked on @ticket.BookingDate.ToString("MMM dd, yyyy hh:mm tt")</span>
+                                    <span class="text-primary fw-semibold"><i class="bi bi-qr-code me-1"></i>Digital Pass Ready</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
 
-                <div class="d-flex justify-content-between align-items-center mt-4">
-                    <a asp-controller="Home" asp-action="Events" class="btn btn-primary fw-semibold">
+                <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
+                    <a asp-controller="Home" asp-action="Events" class="btn btn-outline-primary fw-semibold">
                         <i class="bi bi-compass-fill me-1"></i> Explore More Events
                     </a>
-                    <a asp-controller="Home" asp-action="Booking" class="btn btn-outline-primary fw-semibold">
+                    <a asp-controller="Home" asp-action="Booking" class="btn btn-primary fw-semibold">
                         <i class="bi bi-plus-circle-fill me-1"></i> Book New Ticket
                     </a>
                 </div>

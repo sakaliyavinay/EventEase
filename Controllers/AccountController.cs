@@ -5,7 +5,6 @@ namespace EventEase.Controllers
 {
     public class AccountController : Controller
     {
-        // In-memory static store for demonstration
         private static readonly List<UserModel> UsersStore = new List<UserModel>
         {
             new UserModel
@@ -14,7 +13,7 @@ namespace EventEase.Controllers
                 FullName = "Alex Johnson",
                 Email = "user@eventease.com",
                 Password = "Password123",
-                Phone = "+1 (555) 019-2834",
+                Phone = "+91 98765 43210",
                 Role = "VIP Member",
                 JoinedDate = DateTime.Now.AddMonths(-3)
             }
@@ -111,8 +110,20 @@ namespace EventEase.Controllers
             var user = UsersStore.FirstOrDefault(u => u.Email.Equals(userEmail, StringComparison.OrdinalIgnoreCase));
             if (user == null)
             {
-                return RedirectToAction("Logout");
+                // If account was created in current session but not in UsersStore (edge case), construct user object
+                user = new UserModel
+                {
+                    FullName = HttpContext.Session.GetString("UserName") ?? "EventEase User",
+                    Email = userEmail,
+                    Phone = "+91 98765 43210",
+                    Role = HttpContext.Session.GetString("UserRole") ?? "Member",
+                    JoinedDate = DateTime.Now
+                };
             }
+
+            // Get all tickets booked by this user
+            var userBookings = BookingsRepository.GetBookingsForUser(userEmail);
+            ViewBag.UserBookings = userBookings;
 
             return View(user);
         }
