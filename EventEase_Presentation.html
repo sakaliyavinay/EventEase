@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventEase - Mini Project Presentation</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            width: 90%;
+            background: #1e293b;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border: 2px solid #3b82f6;
+            padding: 40px;
+            min-height: 580px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .slide {
+            display: none;
+        }
+
+        .slide.active {
+            display: block;
+            animation: fadeIn 0.4s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .slide-title {
+            color: #60a5fa;
+            font-weight: 700;
+            border-bottom: 2px solid #334155;
+            padding-bottom: 12px;
+            margin-bottom: 24px;
+        }
+
+        .accent-box {
+            background: #0f172a;
+            border-left: 4px solid #3b82f6;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 16px;
+        }
+
+        .nav-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #334155;
+            padding-top: 20px;
+            margin-top: 20px;
+        }
+
+        .btn-custom {
+            background-color: #3b82f6;
+            color: white;
+            font-weight: 600;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .btn-custom:hover {
+            background-color: #2563eb;
+            color: white;
+        }
+
+        .badge-tech {
+            background: #1e40af;
+            color: #dbeafe;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 6px;
+        }
+
+        @media print {
+            body { background: white; color: black; }
+            .slide-container { border: none; box-shadow: none; background: white; max-width: 100%; padding: 0; }
+            .slide { display: block !important; page-break-after: always; margin-bottom: 40px; }
+            .nav-controls { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="slide-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active" id="slide-1">
+            <div class="text-center py-4">
+                <div class="mb-3">
+                    <span class="badge bg-primary px-3 py-2 fs-6 rounded-pill">ASP.NET MVC Mini Project</span>
+                </div>
+                <h1 class="display-3 fw-bold text-white mb-2">Event<span class="text-primary">Ease</span></h1>
+                <h3 class="text-info fw-semibold mb-4">Online Event Booking & Ticketing System</h3>
+                <p class="lead text-light mb-5">A 6-Page Web Application Built with ASP.NET MVC, C#, Bootstrap 5, & User Management</p>
+                
+                <div class="row justify-content-center g-3 text-start">
+                    <div class="col-md-5">
+                        <div class="accent-box">
+                            <strong><i class="bi bi-person-fill text-primary"></i> Project Title:</strong> EventEase<br>
+                            <strong><i class="bi bi-code-slash text-success"></i> Technology:</strong> ASP.NET MVC (.NET)<br>
+                            <strong><i class="bi bi-currency-rupee text-warning"></i> Currency:</strong> Indian Rupees (₹)
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="accent-box">
+                            <strong><i class="bi bi-github text-info"></i> Repository:</strong> Git & GitHub Ready<br>
+                            <strong><i class="bi bi-layout-sidebar-inset text-purple"></i> Page Count:</strong> 6 Key Pages + User Auth<br>
+                            <strong><i class="bi bi-check-circle-fill text-success"></i> Status:</strong> Build Succeeded (0 Errors)
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Problem & Solution -->
+        <div class="slide" id="slide-2">
+            <h2 class="slide-title"><i class="bi bi-lightbulb-fill text-warning me-2"></i>Executive Summary & Motivation</h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="accent-box h-100">
+                        <h4 class="text-danger mb-3"><i class="bi bi-x-circle-fill me-2"></i>The Problem</h4>
+                        <ul>
+                            <li class="mb-2">Physical ticket counters suffer long queues and manual errors.</li>
+                            <li class="mb-2">Lack of a centralized portal to discover local concerts, tech summits, and workshops.</li>
+                            <li class="mb-2">Difficulty in tracking booked tickets for attendees.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="accent-box h-100" style="border-left-color: #10b981;">
+                        <h4 class="text-success mb-3"><i class="bi bi-check-circle-fill me-2"></i>The Solution (EventEase)</h4>
+                        <ul>
+                            <li class="mb-2">Centralized online web application for instant event discovery.</li>
+                            <li class="mb-2">Real-time seat availability & automatic price calculations in <strong>₹</strong>.</li>
+                            <li class="mb-2">User account portal storing all booked e-ticket passes securely.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Key Features -->
+        <div class="slide" id="slide-3">
+            <h2 class="slide-title"><i class="bi bi-stars text-primary me-2"></i>Key Project Features</h2>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="accent-box">
+                        <h5 class="text-primary"><i class="bi bi-calendar-event me-2"></i>6 Core Pages</h5>
+                        <p class="small mb-0">Home, Events Catalog, Services, About Us, Ticket Booking, and Contact Us.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="accent-box">
+                        <h5 class="text-success"><i class="bi bi-search me-2"></i>Search & Filter</h5>
+                        <p class="small mb-0">Filter events by categories (Tech, Music, Workshop, Sports, Art) and keywords.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="accent-box">
+                        <h5 class="text-warning"><i class="bi bi-ticket-perforated me-2"></i>Pass Tiers</h5>
+                        <p class="small mb-0">Choose Standard or VIP Pass (+50% VIP lounge multiplier) with quantity selection.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="accent-box">
+                        <h5 class="text-info"><i class="bi bi-currency-rupee me-2"></i>Indian Rupee Pricing</h5>
+                        <p class="small mb-0">All ticket rates and calculations displayed natively in Indian Rupees (<strong>₹</strong>).</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="accent-box">
+                        <h5 class="text-purple" style="color: #c084fc;"><i class="bi bi-person-lock me-2"></i>User Management</h5>
+                        <p class="small mb-0">Complete Sign Up, Login, and Profile Dashboard using ASP.NET Session state.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="accent-box">
+                        <h5 class="text-danger"><i class="bi bi-qr-code me-2"></i>Digital Pass System</h5>
+                        <p class="small mb-0">Auto-saves booked tickets directly to the user's account profile dashboard.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: System Architecture -->
+        <div class="slide" id="slide-4">
+            <h2 class="slide-title"><i class="bi bi-diagram-3-fill text-info me-2"></i>System Architecture (ASP.NET MVC)</h2>
+            <div class="row align-items-center">
+                <div class="col-md-12 mb-3">
+                    <div class="d-flex justify-content-around text-center p-3 bg-dark rounded border border-secondary">
+                        <div class="p-3 bg-primary bg-opacity-20 rounded border border-primary">
+                            <h5 class="text-primary mb-1"><i class="bi bi-window me-1"></i> VIEW LAYER</h5>
+                            <span class="small">Razor Views (`.cshtml`) + Bootstrap 5 + CSS3</span>
+                        </div>
+                        <div class="fs-2 text-muted align-self-center">➔</div>
+                        <div class="p-3 bg-success bg-opacity-20 rounded border border-success">
+                            <h5 class="text-success mb-1"><i class="bi bi-gear-wide-connected me-1"></i> CONTROLLER</h5>
+                            <span class="small">`HomeController.cs` & `AccountController.cs`</span>
+                        </div>
+                        <div class="fs-2 text-muted align-self-center">➔</div>
+                        <div class="p-3 bg-warning bg-opacity-20 rounded border border-warning">
+                            <h5 class="text-warning mb-1"><i class="bi bi-database me-1"></i> MODEL / REPO</h5>
+                            <span class="small">`EventItem`, `BookedTicketModel`, `BookingsRepository`</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="accent-box">
+                        <h5 class="text-white">Tech Stack Highlights:</h5>
+                        <span class="badge-tech">C# 12 / .NET 10</span>
+                        <span class="badge-tech">ASP.NET MVC</span>
+                        <span class="badge-tech">Bootstrap 5</span>
+                        <span class="badge-tech">Bootstrap Icons</span>
+                        <span class="badge-tech">HTML5 / CSS3</span>
+                        <span class="badge-tech">Session State</span>
+                        <span class="badge-tech">Git / GitHub</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Page Breakdown -->
+        <div class="slide" id="slide-5">
+            <h2 class="slide-title"><i class="bi bi-layout-text-window-reverse text-success me-2"></i>Website Pages Breakdown</h2>
+            <table class="table table-dark table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th>Page</th>
+                        <th>Route</th>
+                        <th>Key Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="fw-bold text-primary"><i class="bi bi-house-door me-1"></i> Home</td>
+                        <td><code>/Home/Index</code></td>
+                        <td>Hero banner, statistics, featured event cards in <strong>₹</strong>.</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-success"><i class="bi bi-calendar-event me-1"></i> Events Catalog</td>
+                        <td><code>/Home/Events</code></td>
+                        <td>Search bar, category filters, complete list of available events.</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-warning"><i class="bi bi-grid me-1"></i> Services</td>
+                        <td><code>/Home/Services</code></td>
+                        <td>Shows 6 core services (Online Ticketing, VIP Passes, Venue Booking, etc.).</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-info"><i class="bi bi-info-circle me-1"></i> About Us</td>
+                        <td><code>/Home/About</code></td>
+                        <td>Company story, security guarantees, statistics, customer pillars.</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-danger"><i class="bi bi-ticket-fill me-1"></i> Ticket Booking</td>
+                        <td><code>/Home/Booking</code></td>
+                        <td>Interactive reservation form, quantity calculator, QR pass summary.</td>
+                    </tr>
+                    <tr>
+                        <td class="fw-bold text-purple" style="color:#c084fc;"><i class="bi bi-envelope me-1"></i> Contact Us</td>
+                        <td><code>/Home/Contact</code></td>
+                        <td>Inquiry submission form with validation, office address, hotline, FAQs.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Slide 6: Booking & Calculation Logic -->
+        <div class="slide" id="slide-6">
+            <h2 class="slide-title"><i class="bi bi-calculator-fill text-warning me-2"></i>Booking & Pricing Calculation Workflow</h2>
+            <div class="accent-box mb-3">
+                <h5 class="text-warning">Price Calculation Formula:</h5>
+                <code class="fs-6 text-light bg-dark p-2 rounded d-block mb-2">
+                    Total Amount (₹) = (Base Event Price × Tier Multiplier) × Quantity
+                </code>
+                <span class="small text-muted">* Standard Pass = 1.0x Multiplier | VIP Pass = 1.5x Multiplier</span>
+            </div>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="p-3 bg-dark rounded border border-secondary">
+                        <h6 class="text-primary fw-bold"><i class="bi bi-check2-circle me-1"></i> Step 1: Input Validation</h6>
+                        <p class="small text-muted mb-0">Validates Name, Email, Phone, and restricts Ticket Quantity between 1 and 10.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="p-3 bg-dark rounded border border-secondary">
+                        <h6 class="text-success fw-bold"><i class="bi bi-check2-circle me-1"></i> Step 2: Order Auto-Save</h6>
+                        <p class="small text-muted mb-0">Generates unique Reference ID (e.g. <code>EE-8A92B104</code>) and saves ticket to <code>BookingsRepository</code>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: User Management System -->
+        <div class="slide" id="slide-7">
+            <h2 class="slide-title"><i class="bi bi-person-circle text-primary me-2"></i>User Management & Authentication</h2>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="accent-box h-100">
+                        <h5 class="text-primary"><i class="bi bi-person-plus me-1"></i> Sign Up</h5>
+                        <p class="small">Allows new users to create accounts with validation for email uniqueness and password matching.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="accent-box h-100">
+                        <h5 class="text-success"><i class="bi bi-box-arrow-in-right me-1"></i> Login & Session</h5>
+                        <p class="small">Authenticates credentials and stores session state (<code>UserEmail</code>, <code>UserName</code>) for seamless navigation.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="accent-box h-100">
+                        <h5 class="text-warning"><i class="bi bi-person-badge me-1"></i> My Profile</h5>
+                        <p class="small">Displays member avatar, status, and <strong>all booked tickets dynamically linked to the user's account</strong>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Verification & Build -->
+        <div class="slide" id="slide-8">
+            <h2 class="slide-title"><i class="bi bi-shield-check text-success me-2"></i>Testing, Verification & Git Integration</h2>
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <div class="accent-box">
+                        <h5 class="text-success"><i class="bi bi-terminal-fill me-2"></i>Build Verification</h5>
+                        <p class="small mb-1">Executable verified with .NET SDK CLI build command:</p>
+                        <code class="text-success bg-dark p-2 rounded d-block">
+                            Build succeeded.<br>
+                            0 Warning(s)<br>
+                            0 Error(s)
+                        </code>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="accent-box">
+                        <h5 class="text-info"><i class="bi bi-git me-2"></i>Git & GitHub Integration</h5>
+                        <p class="small mb-1">Local Git repository initialized with <code>.gitignore</code> and clean commit history:</p>
+                        <ul class="small mb-0">
+                            <li>Commit 1: Initial EventEase ASP.NET MVC codebase</li>
+                            <li>Commit 2: Fixed layout CSS isolation position bug</li>
+                            <li>Commit 3: User Management System & Rupee formatting</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Future Scope -->
+        <div class="slide" id="slide-9">
+            <h2 class="slide-title"><i class="bi bi-rocket-takeoff-fill text-purple me-2" style="color:#c084fc;"></i>Future Enhancements & Scope</h2>
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <div class="accent-box">
+                        <h6 class="text-primary"><i class="bi bi-credit-card me-1"></i> Payment Gateway</h6>
+                        <p class="small text-muted mb-0">Integration with Razorpay / UPI / Stripe for live online payment processing.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="accent-box">
+                        <h6 class="text-success"><i class="bi bi-database-add me-1"></i> SQL Database</h6>
+                        <p class="small text-muted mb-0">Connecting Entity Framework Core with SQL Server / PostgreSQL for database persistence.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="accent-box">
+                        <h6 class="text-warning"><i class="bi bi-envelope-at me-1"></i> Email & SMS Pass</h6>
+                        <p class="small text-muted mb-0">Automated PDF ticket generation sent directly via SMTP email or SMS notifications.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Conclusion -->
+        <div class="slide" id="slide-10">
+            <div class="text-center py-4">
+                <i class="bi bi-check-circle text-success display-1 mb-3"></i>
+                <h1 class="fw-bold text-white mb-2">Thank You!</h1>
+                <p class="lead text-info mb-4">EventEase - Event Booking System Mini Project</p>
+                <div class="p-3 bg-dark rounded border border-secondary d-inline-block text-start">
+                    <strong>Project Summary:</strong><br>
+                    • Fully functional 6-page ASP.NET MVC Application<br>
+                    • Complete User Management & Account Ticket Storage<br>
+                    • Native Indian Rupee (₹) Price Calculation<br>
+                    • Clean Build & Git Repository Ready for GitHub
+                </div>
+                <div class="mt-4">
+                    <span class="badge bg-primary fs-6">Questions & Answers Welcome</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Controls -->
+        <div class="nav-controls">
+            <button class="btn btn-secondary fw-semibold" id="prevBtn" onclick="changeSlide(-1)" disabled><i class="bi bi-arrow-left me-1"></i> Previous</button>
+            <span class="fw-bold text-muted small" id="slideIndicator">Slide 1 of 10</span>
+            <button class="btn btn-custom" id="nextBtn" onclick="changeSlide(1)">Next <i class="bi bi-arrow-right ms-1"></i></button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 10;
+
+        function changeSlide(direction) {
+            document.getElementById(`slide-${currentSlide}`).classList.remove('active');
+            currentSlide += direction;
+            
+            if (currentSlide < 1) currentSlide = 1;
+            if (currentSlide > totalSlides) currentSlide = totalSlides;
+            
+            document.getElementById(`slide-${currentSlide}`).classList.add('active');
+            document.getElementById('slideIndicator').innerText = `Slide ${currentSlide} of ${totalSlides}`;
+            
+            document.getElementById('prevBtn').disabled = (currentSlide === 1);
+            document.getElementById('nextBtn').disabled = (currentSlide === totalSlides);
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "ArrowLeft") changeSlide(-1);
+            if (event.key === "ArrowRight") changeSlide(1);
+        });
+    </script>
+</body>
+</html>
